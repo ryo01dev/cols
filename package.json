@@ -1,0 +1,9 @@
+{
+  "name": "cols",
+  "version": "0.0.0",
+  "description": "cols",
+  "main": "app.js",
+  "author": {
+    "name": "media"
+  }
+}
