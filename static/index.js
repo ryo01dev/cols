@@ -1,6 +1,12 @@
 ﻿//for vue.js
 
 const COLOR_NUM = 4;
+//ref. https://qiita.com/asa-taka/items/888bc5a1d7f30ee7eda2
+//msec sleep.
+//usage: await sleep(1000);
+const sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
+
+const randInt = max => Math.floor(Math.random() * (max + 1));
 
 const vueApp = new Vue({
     el: '#app',
@@ -8,7 +14,9 @@ const vueApp = new Vue({
         canvasDom: null,
         color: "blue",
         colorList: ["red", "green", "yellow", "blue"],
-        colorIndex: 0
+        colorIndex: 0,
+        bpm: 120,
+        rhythmic: false
     },
     methods: {
         fill: function () {
@@ -24,6 +32,30 @@ const vueApp = new Vue({
             this.color = this.colorList[this.colorIndex];
             this.fill();
         },
+
+        randomColorSet: function () {
+            const r = randInt(255);
+            const g = randInt(255);
+            const b = randInt(255);
+            console.log("r,g,b:", r, g, b);
+            this.color = `rgb(${r}, ${g}, ${b})`;
+            this.fill();
+        },
+
+        rhythmColorSet: async function () {
+            this.rhythmic = true;
+
+            const sleepmsec = 60000 / this.bpm;
+            while (this.rhythmic) {
+                this.randomColorSet();
+                //60000/bpm
+                await sleep(sleepmsec);
+            }
+        },
+        rhythmColorStop: function () {
+            this.rhythmic = false;
+        },
+
         resizeCanvasSize: function () {
             const container = document.getElementById("container");
 
