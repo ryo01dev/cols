@@ -8,6 +8,13 @@ const sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
 
 const randInt = max => Math.floor(Math.random() * (max + 1));
 
+//for socket.io
+const socket = io();
+
+socket.on('color', (msg) => {
+    vueApp.color = msg;
+});
+
 const vueApp = new Vue({
     el: '#app',
     data: {
@@ -31,6 +38,7 @@ const vueApp = new Vue({
             }
             this.color = this.colorList[this.colorIndex];
             //this.fill();
+            this.emit();
         },
 
         randomColorSet: function () {
@@ -40,6 +48,7 @@ const vueApp = new Vue({
             console.log("r,g,b:", r, g, b);
             this.color = `rgb(${r}, ${g}, ${b})`;
             //this.fill();
+            this.emit();
         },
 
         rhythmColorSet: async function () {
@@ -68,6 +77,16 @@ const vueApp = new Vue({
             this.fill();
             //this.canvasDom.width = container.offsetWidth;
             //this.canvasDom.height = container.offsetHeight;
+        },
+
+        emit: function () {
+            //socket.emit('color', this.color);//no ack
+
+
+            socket.emit('color', this.color, (data) => {
+                console.log(data); //response data.
+            });
+            //emit socket io ('color', this.color);
         }
 
     },
