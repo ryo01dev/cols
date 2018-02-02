@@ -29,15 +29,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="server.js" />
-    <Compile Include="static\index.js">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="static\index.js" />
     <Compile Include="static\lib\socket.io.js" />
     <Compile Include="static\lib\vue.js" />
     <Compile Include="static\lib\vue.min.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="static\debug.html" />
+    <Content Include="static\master.html" />
     <Content Include="static\index.css">
       <SubType>Code</SubType>
     </Content>
