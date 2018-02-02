@@ -30,7 +30,7 @@ const vueApp = new Vue({
                 this.colorIndex = 0;
             }
             this.color = this.colorList[this.colorIndex];
-            this.fill();
+            //this.fill();
         },
 
         randomColorSet: function () {
@@ -39,7 +39,7 @@ const vueApp = new Vue({
             const b = randInt(255);
             console.log("r,g,b:", r, g, b);
             this.color = `rgb(${r}, ${g}, ${b})`;
-            this.fill();
+            //this.fill();
         },
 
         rhythmColorSet: async function () {
@@ -78,6 +78,11 @@ const vueApp = new Vue({
     mounted: function () {
         this.resizeCanvasSize();
         this.colorSet();
+    },
+    watch: {
+        color: function (val) {
+            this.fill(val);
+        }
     },
     beforeDestroy: function () {
         // インスタンスを破棄する前に、イベントリスナから削除
