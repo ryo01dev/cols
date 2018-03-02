@@ -86,6 +86,10 @@ const vueApp = new Vue({
             socket.emit('color', this.color, (data) => {
                 console.log(data); //response data.
             });
+            //emit twice. (delay happens if only once emit... why??)
+            socket.emit('color', this.color, (data) => {
+                console.log(data); //response data.
+            });
             //emit socket io ('color', this.color);
         }
 
