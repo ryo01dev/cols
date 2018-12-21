@@ -95,7 +95,9 @@ const vueApp = new Vue({
 
     },
     created: function () {
-        this.canvasDom = document.getElementById("colorCanvas");
+		this.canvasDom = document.getElementById("colorCanvas");
+		//change color by clicking canvas
+		this.canvasDom.onclick = this.randomColorSet;
         window.addEventListener('resize', this.resizeCanvasSize, false);
     },
     mounted: function () {
