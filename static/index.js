@@ -101,8 +101,10 @@ const vueApp = new Vue({
         window.addEventListener('resize', this.resizeCanvasSize, false);
     },
     mounted: function () {
-        this.resizeCanvasSize();
-        this.colorSet();
+		this.resizeCanvasSize();
+		
+		//これがあると、新端末アクセス時に勝手に既存端末が初期色(緑)にもどってしまうのでコメントアウト
+        // this.colorSet();
     },
     watch: {
         color: function (val) {
